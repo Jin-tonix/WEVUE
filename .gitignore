@@ -1,0 +1,86 @@
+# --------------------
+# 일반적인 무시 파일
+# --------------------
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+Thumbs.db
+
+# --------------------
+# IntelliJ/Android Studio 관련
+# --------------------
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# --------------------
+# VS Code 관련
+# (필요하다면 주석 해제)
+#.vscode/
+
+# --------------------
+# Flutter/Dart/Pub 관련
+# --------------------
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+generated_plugin_registrant.dart
+
+# --------------------
+# iOS 관련
+# --------------------
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+ios/Runner.xcworkspace/
+ios/Pods/
+ios/.symlinks/
+ios/Podfile.lock
+ios/Podfile
+
+# --------------------
+# Android 관련
+# --------------------
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+
+# Android Studio에서 빌드 산출물
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# --------------------
+# Firebase 비밀 설정 파일
+# --------------------
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+
+# --------------------
+# 환경 변수 및 민감 정보
+# --------------------
+.env
+.env.*
+
+# --------------------
+# 심볼 및 난독화 관련
+# --------------------
+app.*.symbols
+app.*.map.json
