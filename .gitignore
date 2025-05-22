@@ -76,7 +76,7 @@ ios/Runner/GoogleService-Info.plist
 # --------------------
 # 환경 변수 및 민감 정보
 # --------------------
-.env
+assets/.env
 .env.*
 
 # --------------------

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../setting/settingscreen.dart';
 import 'communityscreen.dart';
-import 'community_detail.dart';
+import 'map_search_page.dart'; // 경로는 실제 위치에 맞게 수정
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -90,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class CategoryGridScreen extends StatefulWidget {
   const CategoryGridScreen({super.key});
-
   @override
   State<CategoryGridScreen> createState() => _CategoryGridScreenState();
 }
@@ -98,7 +97,6 @@ class CategoryGridScreen extends StatefulWidget {
 class _CategoryGridScreenState extends State<CategoryGridScreen> {
   final TextEditingController _searchController = TextEditingController();
 
-  // 카테고리 리스트 (불변)
   final categories = const [
     {'label': '병원', 'icon': Icons.local_hospital},
     {'label': '약국', 'icon': Icons.local_pharmacy},
@@ -112,10 +110,13 @@ class _CategoryGridScreenState extends State<CategoryGridScreen> {
   ];
 
   void _onSearch(String keyword) {
-    // TODO: 검색 API 연동 후 결과 처리
-    // 예시: Navigator.push(context, ...);
-    print('검색어: $keyword');
-    // 이후 결과 페이지로 이동 or setState로 결과 표시
+    if (keyword.trim().isEmpty) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => MapSearchPage(initialKeyword: keyword),
+      ),
+    );
   }
 
   @override
@@ -124,21 +125,30 @@ class _CategoryGridScreenState extends State<CategoryGridScreen> {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          // ---- 검색창 추가 부분 ----
-          TextField(
-            controller: _searchController,
-            onSubmitted: _onSearch,
-            decoration: InputDecoration(
-              hintText: '검색어를 입력하세요',
-              prefixIcon: const Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _searchController,
+                  onSubmitted: _onSearch,
+                  decoration: InputDecoration(
+                    hintText: '검색어를 입력하세요',
+                    prefixIcon: const Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                  ),
+                ),
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
-            ),
+              IconButton(
+                icon: const Icon(Icons.search),
+                onPressed: () => _onSearch(_searchController.text),
+              ),
+            ],
           ),
           const SizedBox(height: 24),
-          // ---- 카테고리 그리드 ----
+          // --- 아래는 기존 그리드 ---
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -174,8 +184,6 @@ class _CategoryGridScreenState extends State<CategoryGridScreen> {
     );
   }
 }
-
-
 class CategoryItem extends StatelessWidget {
   final Map category;
   const CategoryItem({super.key, required this.category});
